@@ -34,5 +34,5 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: summary.json
-          path: summary.json
+          path: reports/summary.json
           retention-days: 1
