@@ -1,4 +1,4 @@
-# k6-boilerplate
+# k6-example
 
 ## Installation
 
