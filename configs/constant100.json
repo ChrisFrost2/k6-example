@@ -1,0 +1,32 @@
+{
+    "scenarios": {
+        "constant_request_rate": {
+            "executor": "constant-arrival-rate",
+            "rate": 1,
+            "timeUnit": "1s",
+            "duration": "10s",
+            "preAllocatedVUs": 100
+        }
+    },
+    "thresholds": {
+        "response_time": [
+            {
+                "threshold": "p(50) < 200",
+                "timeUnit": "ms"
+            },
+            {
+                "threshold": "p(95) < 400",
+                "timeUnit": "ms"
+            },
+            {
+                "threshold": "p(99) < 600",
+                "timeUnit": "ms"
+            }
+        ]
+    },
+    "summaryTrendStats": [
+        "p(50)",
+        "p(95)",
+        "p(99)"
+    ]
+}

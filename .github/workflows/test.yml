@@ -1,0 +1,44 @@
+name: Fetches a user list
+
+on:
+  workflow_dispatch:   
+
+concurrency: "fetchesUserList"
+
+jobs:
+  quote-configit-cloud:
+    name: Run performance tests
+    runs-on: ubuntu-latest
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:      
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup K6
+        uses: grafana/setup-k6-action@v1
+      - name: Run local k6 test
+        uses: grafana/run-k6-action@v1
+        with:
+          path: scripts/test.js
+      # - name: Send a message to Microsoft Teams
+      #   if: failure()
+      #   uses: aliencube/microsoft-teams-actions@v0.8.0
+      #   with:
+      #     webhook_uri: https://configitadmin.webhook.office.com/webhookb2/${{ secrets.WEBHOOK_URI }}
+      #     title: Some of Quote performance tests failed - ${{ github.event.inputs.serverUrl }}
+      #     text: go to the report or github action artifact and check if the problem is application or a test scenario implementation
+      #     theme_color: "d76400"
+      #     actions: '[{ "@type": "OpenUri", "name": "Github action", "targets": [{ "os": "default", "uri": "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}" }] }]'
+      - name: Archive K6 details report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: details.csv
+          path: details.csv
+          retention-days: 1
+      - name: Archive K6 summary report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: summary.json
+          path: summary.json
+          retention-days: 1
