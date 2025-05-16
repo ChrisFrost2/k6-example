@@ -8,7 +8,7 @@
     "lint": "npx eslint scripts/* --fix",
     "format:check": "npx prettier --check scripts",
     "format": "npx prettier --write scripts",
-    "test:constant100": "k6 run --config configs/constant100.json scripts/test1.js --summary-export=reports/summary.json"
+    "test:constant100": "k6 run --config configs/constant100.json scripts/test.js --summary-export=reports/summary.json"
   },
   "devDependencies": {
     "eslint": "^8.45.0",
